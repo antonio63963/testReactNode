@@ -9,11 +9,11 @@ const axios = require('axios');
 /* GET home page. */
 
 
-router.get('/', (req, res) => {
-  console.log('с HTML каждый может, а без??');
-  console.log(path.join(__dirname, '../build/index.html'));
-  res.sendFile(path.join(__dirname, '../build/index.html'));
-})
+// router.get('/', (req, res) => {
+//   console.log('с HTML каждый может, а без??');
+//   console.log(path.join(__dirname, '../build/index.html'));
+//   res.sendFile(path.join(__dirname, '../build/index.html'));
+// })
 router.get('/products', async(req, res) => {
   console.log('++++++in the product route')
   const {data} = await axios.get(`${url}?limit=10`);

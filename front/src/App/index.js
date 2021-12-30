@@ -17,14 +17,14 @@ function App() {
   console.log('App init')
   useEffect(() => {
    initStore(dispatch);
-
+    
   }, []);
   return (
     <AppLayout>
       <Routes>
-        <Route exact path='/api/' element={ <ActionCard /> } />
+        <Route exact path='/' element={ <ActionCard /> } />
         <Route exact path='/categories' element={ <Categories /> } />
-        <Route exact path='/api/products' element={ <Products /> } />
+        <Route exact path='/products' element={ <Products /> } />
       </Routes>
     </AppLayout>
 

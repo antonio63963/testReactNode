@@ -31,11 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', usersRouter);
 
 
-app.get('/api/*', (req, res) => {
-  console.log('URL*: ', req.url);
-  res.redirect(`http://localhost:8888${req.url}`)
-})
-
+// app.get('/api/*', (req, res) => {
+//   console.log('URL*: ', req.url);
+//   res.redirect(`http://localhost:8888${req.url}`)
+// })
+app.use('/api', apiRouter)
 app.use('*', (req, res) => {
   console.log('===============file html has sent')
   console.log(path.resolve(__dirname, 'build/index.html'))

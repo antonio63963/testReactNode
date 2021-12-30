@@ -33,10 +33,10 @@ export default function AppLayout({children}) {
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
-                <NavLink to='/api/'> Actions </NavLink>
+                <NavLink to='/'> Actions </NavLink>
               </Menu.Item>
               <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <NavLink to='/api/products'> Products </NavLink>
+              <NavLink to='/products'> Products </NavLink>
               </Menu.Item>
               <NavLink to='/categories'>
                 <SubMenu key="sub1" icon={<UserOutlined />} title="Categories">

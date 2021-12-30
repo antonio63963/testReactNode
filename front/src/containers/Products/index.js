@@ -14,8 +14,10 @@ function Products() {
   const dispatch = useDispatch();
   console.log('Productd_out')
   useEffect(() => {
-    initStore(dispatch);
-  console.log('Productd')
+    if(!store.products) {
+      initStore(dispatch);
+    };
+    console.log('Productd')
   }, []);
   const isLoading = store.arrProductStatus !== 'SUCCESS';
 
