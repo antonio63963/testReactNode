@@ -10,9 +10,11 @@ import {
   TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import StoreIcon from '../../components/StoreIcon';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
+
 
 
 
@@ -27,6 +29,7 @@ export default function AppLayout({children}) {
     <Layout style={{ minHeight: '100vh' }}>
        <Header className="site-layout-background" style={{ padding: 0 }} >
          HELL(O)
+         <StoreIcon />
        </Header>
         <Layout>
           <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
@@ -51,7 +54,9 @@ export default function AppLayout({children}) {
                 <Menu.Item key="8">Team 2</Menu.Item>
               </SubMenu>
               <Menu.Item key="9" icon={<FileOutlined />}>
-                Store
+                <NavLink to='/store'>
+                  Store
+                </NavLink>
               </Menu.Item>
             </Menu>
           </Sider>

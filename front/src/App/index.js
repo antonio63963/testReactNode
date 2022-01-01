@@ -9,6 +9,7 @@ import ActionCard from '../components/ActionCard'
 import { useDispatch } from 'react-redux';
 import { initStore } from '../reducer/actions';
 import axios from 'axios';
+import Store from '../containers/Store.js';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route exact path='/' element={ <ActionCard /> } />
         <Route exact path='/categories' element={ <Categories /> } />
         <Route exact path='/products' element={ <Products /> } />
+        <Route exact path='/store' element={<Store />} />
       </Routes>
     </AppLayout>
 

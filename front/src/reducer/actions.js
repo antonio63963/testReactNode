@@ -5,7 +5,8 @@ import {
   PRODUCT_ADD_BY_ID, 
   GET_PRODUCTS_BY_LIMIT, 
   LOADING,
-  INIT_APP
+  INIT_APP,
+  ADD_TO_STORE
 } from '../typesAction';
 
 
@@ -71,6 +72,13 @@ const actionCategories = async () => {
     payload: { categories: result.data}
   }
   return action;
+};
+
+const actionAddToStore = (id, price) => {
+  return ({
+    type: ADD_TO_STORE,
+    payload: {id, price, title, image}
+  })
 }
 
 // COMPOSITONS
@@ -99,5 +107,6 @@ const initStore = async(dispatch) => {
 export {
   getProductById,
   getProductsByLimit,
-  initStore
+  initStore,
+  actionAddToStore
 }

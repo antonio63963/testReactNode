@@ -5,7 +5,8 @@ import {
   PRODUCT_ADD_BY_ID, 
   GET_PRODUCTS_BY_LIMIT, 
   LOADING,
-  INIT_APP
+  INIT_APP,
+  ADD_TO_STORE
 } from '../typesAction';
 
 
@@ -25,7 +26,7 @@ const reducer = (state = initialState, action) => {
       return update(state, {
         arrProductStatus: {$set: {LOADING}}
       })
-    }
+    };
     case PRODUCT_LOAD_IN_PROGRESS: {
       const product = {
         id: Number(action.payload.id), status: 'in_progress', 
@@ -55,20 +56,22 @@ const reducer = (state = initialState, action) => {
 
     case LOADING: {
       return update(state, {$set:{arrProductStatus: action.payload}})
-    }
+    };
     case GET_PRODUCTS_BY_LIMIT : {
 
       return update(state, {
         products: {$set: action.payload.products}, 
         arrProductStatus: {$set: 'SUCCESS'}})
-    }
+    };
+    
     case INIT_APP: {
       return update(state, {
         categories: {$set: action.payload.categories},
         products: {$set: action.payload.products},
         arrProductStatus: {$set: 'SUCCESS'}
       })
-    }
+    };
+
     default: 
      return state
   }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useState} from 'react';
 // import { Image, Button, Space } from 'antd';
-import { Card } from 'antd';
+import { Card, Button } from 'antd';
 import style from './card.module.css'
 const { Meta } = Card;
 
@@ -42,6 +42,9 @@ export default function CardProduct({product}) {
     >
       <Meta title={ title } />
       ${price}
+      <div>
+        <Button type="primary">Add to store</Button>
+      </div>
       <hr/>
       <p>{description}</p>
     </Card>
