@@ -74,7 +74,8 @@ const actionCategories = async () => {
   return action;
 };
 
-const actionAddToStore = (id, price) => {
+const actionAddToStore = (prodData) => {
+  const { id, price, title, image } = prodData;
   return ({
     type: ADD_TO_STORE,
     payload: {id, price, title, image}
@@ -89,7 +90,7 @@ const getProductById = async(id, dispatch) => {
 const getProductsByLimit = async(dispatch) => {
   // dispatch(startLoading());
   dispatch(await actionGetByLimit());
-}
+};
 const initStore = async(dispatch) => {
   // dispatch(startLoading())
   const { payload } = await actionGetByLimit();
@@ -99,7 +100,10 @@ const initStore = async(dispatch) => {
   action.payload = {...action.payload, products};
   console.log('action: ', action);
   dispatch(action);
-}
+};
+const addToStore = (prodData, dispatch) => {
+  dispatch(actionAddToStore(prodData));
+};
 
 
 
@@ -108,5 +112,5 @@ export {
   getProductById,
   getProductsByLimit,
   initStore,
-  actionAddToStore
+  addToStore
 }

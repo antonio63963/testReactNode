@@ -1,5 +1,6 @@
-import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {useState} from 'react';
+import { addToStore } from '../reducer/actions';
 // import { Image, Button, Space } from 'antd';
 import { Card, Button } from 'antd';
 import style from './card.module.css'
@@ -7,8 +8,16 @@ const { Meta } = Card;
 
 
 export default function CardProduct({product}) {
+  const storeData = useSelector(state => state.store)
+  const dispatch = useDispatch();
   const {id = 0, title = 'some title', price = 1, image, description = 'some description'} = product;
-  const [ isHover, setIsHover ] = useState(false)
+  const prodData = { id, title, price, image };
+
+  const [ isHover, setIsHover ] = useState(false);
+  const onAddToStore = (prodData, dispatch) => {
+    addToStore(prodData, dispatch);
+    // console.log('onAddToStore: ', storeData);
+  };
   return (
    <div className={style.card}>
       <Card 
@@ -43,7 +52,7 @@ export default function CardProduct({product}) {
       <Meta title={ title } />
       ${price}
       <div>
-        <Button type="primary">Add to store</Button>
+        <Button type="primary" onClick={() => onAddToStore(prodData, dispatch)}>Add to store</Button>
       </div>
       <hr/>
       <p>{description}</p>

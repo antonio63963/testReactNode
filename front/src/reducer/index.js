@@ -1,4 +1,4 @@
-import update from 'immutability-helper';
+import update, { extend } from 'immutability-helper';
 import { 
   PRODUCT_LOAD_IN_PROGRESS, 
   PRODUCT_LOAD_FAIL, 
@@ -12,8 +12,10 @@ import {
 
 const initialState = {
   categories: [],
-  products: []
+  products: [],
+  store: []
 };
+
 
 const reducer = (state = initialState, action) => {
 
@@ -63,7 +65,7 @@ const reducer = (state = initialState, action) => {
         products: {$set: action.payload.products}, 
         arrProductStatus: {$set: 'SUCCESS'}})
     };
-    
+
     case INIT_APP: {
       return update(state, {
         categories: {$set: action.payload.categories},
@@ -71,6 +73,30 @@ const reducer = (state = initialState, action) => {
         arrProductStatus: {$set: 'SUCCESS'}
       })
     };
+
+    case ADD_TO_STORE: {
+      // const ind = state.store.findIndex( product  => product.id === action.payload.id );
+    
+      const isExist = state.store.reduce( (acc, item, ind) => {
+        if(item.id === action.payload.id) {
+          acc.ind = ind;
+          acc.amount = item.amount + 1;
+        };
+        return acc;
+      }, {ind: null, amount: null});
+console.log('REDUCE: ', isExist)
+
+      if(isExist.ind === null) {
+        const selectedProduct = {...action.payload, amount: 1}
+        return update(state, {
+          store: {$push: [selectedProduct]}
+        });
+      } else {
+        return update(state, { store:
+          {[isExist.ind]: {amount: {$set: isExist.amount}}}
+        })
+      }
+    }
 
     default: 
      return state
