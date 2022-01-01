@@ -10,7 +10,6 @@ import style from './products.module.css';
 function Products() {
 
   const store = useSelector( state => state);
-  console.log(store)
   const dispatch = useDispatch();
   console.log('Productd_out')
   useEffect(() => {
@@ -19,6 +18,10 @@ function Products() {
     };
     console.log('Productd')
   }, []);
+  useEffect(() => {
+    console.log(store)
+
+  }, [store])
   const isLoading = store.arrProductStatus !== 'SUCCESS';
 
 

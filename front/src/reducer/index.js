@@ -13,7 +13,7 @@ import {
 const initialState = {
   categories: [],
   products: [],
-  store: []
+  store: {items: [], generalAmount: 0}
 };
 
 
@@ -22,6 +22,9 @@ const reducer = (state = initialState, action) => {
   const findFilmIdx = (id) => {
     return state.products.findIndex(product => product.id == id);
   };
+  const increaseStoreAmount = (newState) => {
+    newState.store.generalAmount = newState.store.generalAmount + 1;
+  }
 
   switch(action.type) {
     case LOADING: {
@@ -75,31 +78,37 @@ const reducer = (state = initialState, action) => {
     };
 
     case ADD_TO_STORE: {
-      // const ind = state.store.findIndex( product  => product.id === action.payload.id );
-    
-      const isExist = state.store.reduce( (acc, item, ind) => {
+      const isExist = state.store.items.reduce( (acc, item, ind) => {
         if(item.id === action.payload.id) {
           acc.ind = ind;
           acc.amount = item.amount + 1;
         };
         return acc;
       }, {ind: null, amount: null});
-console.log('REDUCE: ', isExist)
+      console.log('REDUCE: ', isExist)
 
       if(isExist.ind === null) {
         const selectedProduct = {...action.payload, amount: 1}
-        return update(state, {
-          store: {$push: [selectedProduct]}
+        const newState = update(state, {
+          store: {
+            items: {$push: [selectedProduct]}
+          }
         });
+        // newState.store.generalAmount = newState.store.generalAmount + 1;
+        increaseStoreAmount(newState);
+        return newState;
       } else {
-        return update(state, { store:
-          {[isExist.ind]: {amount: {$set: isExist.amount}}}
-        })
-      }
+        const newState = update(state, { store:
+          {items: {[isExist.ind]: {amount: {$set: isExist.amount}}}}
+        });
+        increaseStoreAmount(newState);
+        // newState.store.generalAmount = newState.store.generalAmount + 1;
+        return newState;
+      };
     }
 
     default: 
-     return state
+      return state
   }
 };
 
