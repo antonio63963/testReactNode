@@ -8,7 +8,16 @@
 }
 
 .buttonsWrapper {
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 100%; */
+}
+
+.btnAction {
+  margin-right: 10px;
+}
+
+.propName {
+  padding: 0;
+  margin: 0;
 }

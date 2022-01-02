@@ -1,8 +1,8 @@
 import { Image, Button, Space } from 'antd';
 import style from './storeItem.module.css';
 
-const StoreItem = ({props}) => {
-  const {title, id, price, amount, image} = props;
+const StoreItem = ({ product }) => {
+  const {title, id, price, amount, image, sum } = product;
   return (
     <Space size={12}>
       <Image
@@ -18,20 +18,24 @@ const StoreItem = ({props}) => {
       />
      <div className={style.bodyCardWrapper}>
         <div>
-          <h3>Title: </h3>
+          <h3 className={style.propName}>Title: </h3>
           <span>{title}</span>
-          <h3>Price: {price}</h3>
+          <h3 className={style.propName}>Price: {price}</h3>
           <span>{price}</span>
-          <h3>Amount:</h3>
+          <h3 className={style.propName}>Amount:</h3>
           <span>{amount}</span>
+          <h2 className={style.propName}>Sum:</h2>
+          <span>{sum}</span>
         </div>
         <div className={style.buttonsWrapper}>
           <Button
+            className={style.btnAction}
             type="primary"
           >
             Add
           </Button>
           <Button
+            className={style.btnAction}
             type="primary"
           >
             Decrease

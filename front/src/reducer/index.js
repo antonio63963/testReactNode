@@ -13,7 +13,11 @@ import {
 const initialState = {
   categories: [],
   products: [],
-  store: {items: [], generalAmount: 0}
+  store: {
+    items: [], 
+    generalAmount: 0,
+    total: 0
+  }
 };
 
 
@@ -23,7 +27,16 @@ const reducer = (state = initialState, action) => {
     return state.products.findIndex(product => product.id == id);
   };
   const increaseStoreAmount = (newState) => {
-    newState.store.generalAmount = newState.store.generalAmount + 1;
+    const { items } = newState.store;
+    const { total, generalAmount } = items.reduce((acc, item) => {
+      item.sum = item.amount * item.price;
+      acc.generalAmount += item.amount;
+      acc.total += item.sum;
+      return acc;
+    }, { total: 0, generalAmount: 0 })
+
+    newState.store.generalAmount = generalAmount;
+    newState.store.total = total;
   }
 
   switch(action.type) {
@@ -88,7 +101,7 @@ const reducer = (state = initialState, action) => {
       console.log('REDUCE: ', isExist)
 
       if(isExist.ind === null) {
-        const selectedProduct = {...action.payload, amount: 1}
+        const selectedProduct = {...action.payload, amount: 1 }
         const newState = update(state, {
           store: {
             items: {$push: [selectedProduct]}
