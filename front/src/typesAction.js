@@ -7,3 +7,4 @@ export const LOADING = 'LOADING';
 export const INIT_APP = 'INIT_APP';
 export const ADD_TO_STORE = 'ADD_TO_STORE';
 export const INCREASE_STORE = 'INCREASE_STORE';
+export const DELETE_ITEM_FROM_STORE = 'DELETE_ITEM_FROM_STORE';

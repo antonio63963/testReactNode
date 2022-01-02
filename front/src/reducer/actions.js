@@ -7,7 +7,8 @@ import {
   LOADING,
   INIT_APP,
   ADD_TO_STORE,
-  INCREASE_STORE
+  INCREASE_STORE,
+  DELETE_ITEM_FROM_STORE
 } from '../typesAction';
 
 
@@ -81,14 +82,23 @@ const actionAddToStore = (prodData) => {
     type: ADD_TO_STORE,
     payload: {id, price, title, image}
   })
-}
+};
+
 const actionDecreaseStore = (prodData) => {
   // {id, ind, amount} = prodData
   return ({
     type: INCREASE_STORE,
     payload: prodData
   })
-}
+};
+
+const actionDeleteItemStore = (id) => {
+  return ({
+    type: DELETE_ITEM_FROM_STORE,
+    payload: {id}
+  });
+};
+
 // COMPOSITONS
 const getProductById = async(id, dispatch) => {
   dispatch(await startLoadProduct(id));
@@ -113,7 +123,10 @@ const addToStore = (prodData, dispatch) => {
 };
 const decreaseStore = (prodData, dispatch) => {
   dispatch(actionDecreaseStore(prodData));
-}
+};
+const deleteItemFromStore = (id, dispatch) => {
+  dispatch(actionDeleteItemStore(id));
+};
 
 
 
@@ -123,5 +136,6 @@ export {
   getProductsByLimit,
   initStore,
   addToStore,
-  decreaseStore
+  decreaseStore,
+  deleteItemFromStore
 }

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addToStore, decreaseStore } from '../../reducer/actions';
+import { addToStore, decreaseStore, deleteItemFromStore } from '../../reducer/actions';
 import { Image, Button, Space } from 'antd';
 import style from './storeItem.module.css';
 
@@ -14,7 +14,11 @@ const StoreItem = ({ props }) => {
   };
   const onDecrease = () => {
     decreaseStore({id, amount}, dispatch)
-  }
+  };
+  const onDelete = () => {
+    deleteItemFromStore(id, dispatch);
+  };
+  
   return (
     <Space size={12}>
       <Image
@@ -53,6 +57,13 @@ const StoreItem = ({ props }) => {
             type="primary"
           >
             Decrease
+          </Button>
+          <Button
+            onClick={() => onDelete()}
+            className={style.btnAction}
+            type="danger"
+          >
+            Delete
           </Button>
         </div>
      </div>
