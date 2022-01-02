@@ -15,7 +15,7 @@ const Store = () => {
         <div>
           {
             storeData.items.map( (item, ind) => (
-              <StoreItem props={{id:item.id, ind}} />
+              <StoreItem props={{id:item.id, ind}} key={`sotoreItem${ind}`} />
             ))
           }
         </div>

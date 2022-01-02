@@ -6,7 +6,8 @@ import {
   GET_PRODUCTS_BY_LIMIT, 
   LOADING,
   INIT_APP,
-  ADD_TO_STORE
+  ADD_TO_STORE,
+  INCREASE_STORE
 } from '../typesAction';
 
 
@@ -26,7 +27,7 @@ const reducer = (state = initialState, action) => {
   const findFilmIdx = (id) => {
     return state.products.findIndex(product => product.id == id);
   };
-  const increaseStoreAmount = (newState) => {
+  const setStoreAmount = (newState) => {
     const { items } = newState.store;
     const { total, generalAmount } = items.reduce((acc, item) => {
       item.sum = item.amount * item.price;
@@ -37,7 +38,8 @@ const reducer = (state = initialState, action) => {
 
     newState.store.generalAmount = generalAmount;
     newState.store.total = total;
-  }
+  };
+
 
   switch(action.type) {
     case LOADING: {
@@ -45,6 +47,7 @@ const reducer = (state = initialState, action) => {
         arrProductStatus: {$set: {LOADING}}
       })
     };
+
     case PRODUCT_LOAD_IN_PROGRESS: {
       const product = {
         id: Number(action.payload.id), status: 'in_progress', 
@@ -75,6 +78,7 @@ const reducer = (state = initialState, action) => {
     case LOADING: {
       return update(state, {$set:{arrProductStatus: action.payload}})
     };
+
     case GET_PRODUCTS_BY_LIMIT : {
 
       return update(state, {
@@ -108,17 +112,30 @@ const reducer = (state = initialState, action) => {
           }
         });
 
-        increaseStoreAmount(newState);
+        setStoreAmount(newState);
         return newState;
       } else {
         const newState = update(state, { store:
           {items: {[isExist.ind]: {amount: {$set: isExist.amount}}}}
         });
-        increaseStoreAmount(newState);
+        setStoreAmount(newState);
         console.log('for store: ', newState)
 
         return newState;
       };
+    }
+
+    case INCREASE_STORE: {
+      const { id, amount: oldAmount } = action.payload;
+      console.log('INcrease: ', oldAmount)
+      const ind = findFilmIdx(id);
+      console.log("inc ind: ", ind)
+      const newState = update(state, { store: {
+        items: {[ind]: {amount: {$set: oldAmount - 1}}}
+      }});
+      setStoreAmount(newState);
+      console.log('inc state: ', newState)
+      return newState;
     }
 
     default: 

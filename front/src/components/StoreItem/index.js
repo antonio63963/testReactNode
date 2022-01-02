@@ -1,17 +1,19 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addToStore } from '../../reducer/actions';
+import { addToStore, decreaseStore } from '../../reducer/actions';
 import { Image, Button, Space } from 'antd';
 import style from './storeItem.module.css';
 
 const StoreItem = ({ props }) => {
-  console.log(props);
   const { id, ind } = props;
   const dispatch = useDispatch();
   const selectedProduct = useSelector(state => state.store.items[ind]);
   const {title, price, amount, image, sum } = selectedProduct;
   const onAdd = () => {
     console.log('CLICK')
-    addToStore({id}, dispatch);
+    addToStore({id, ind}, dispatch);
+  };
+  const onDecrease = () => {
+    decreaseStore({id, amount}, dispatch)
   }
   return (
     <Space size={12}>
@@ -46,6 +48,7 @@ const StoreItem = ({ props }) => {
             Add
           </Button>
           <Button
+            onClick={() => onDecrease()}
             className={style.btnAction}
             type="primary"
           >

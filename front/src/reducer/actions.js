@@ -6,7 +6,8 @@ import {
   GET_PRODUCTS_BY_LIMIT, 
   LOADING,
   INIT_APP,
-  ADD_TO_STORE
+  ADD_TO_STORE,
+  INCREASE_STORE
 } from '../typesAction';
 
 
@@ -81,7 +82,13 @@ const actionAddToStore = (prodData) => {
     payload: {id, price, title, image}
   })
 }
-
+const actionDecreaseStore = (prodData) => {
+  // {id, ind, amount} = prodData
+  return ({
+    type: INCREASE_STORE,
+    payload: prodData
+  })
+}
 // COMPOSITONS
 const getProductById = async(id, dispatch) => {
   dispatch(await startLoadProduct(id));
@@ -104,6 +111,9 @@ const initStore = async(dispatch) => {
 const addToStore = (prodData, dispatch) => {
   dispatch(actionAddToStore(prodData));
 };
+const decreaseStore = (prodData, dispatch) => {
+  dispatch(actionDecreaseStore(prodData));
+}
 
 
 
@@ -112,5 +122,6 @@ export {
   getProductById,
   getProductsByLimit,
   initStore,
-  addToStore
+  addToStore,
+  decreaseStore
 }
