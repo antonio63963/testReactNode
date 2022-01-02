@@ -1,8 +1,18 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { addToStore } from '../../reducer/actions';
 import { Image, Button, Space } from 'antd';
 import style from './storeItem.module.css';
 
-const StoreItem = ({ product }) => {
-  const {title, id, price, amount, image, sum } = product;
+const StoreItem = ({ props }) => {
+  console.log(props);
+  const { id, ind } = props;
+  const dispatch = useDispatch();
+  const selectedProduct = useSelector(state => state.store.items[ind]);
+  const {title, price, amount, image, sum } = selectedProduct;
+  const onAdd = () => {
+    console.log('CLICK')
+    addToStore({id}, dispatch);
+  }
   return (
     <Space size={12}>
       <Image
@@ -29,6 +39,7 @@ const StoreItem = ({ product }) => {
         </div>
         <div className={style.buttonsWrapper}>
           <Button
+            onClick={() => onAdd()}
             className={style.btnAction}
             type="primary"
           >

@@ -75,7 +75,7 @@ const actionCategories = async () => {
 };
 
 const actionAddToStore = (prodData) => {
-  const { id, price, title, image } = prodData;
+  const { id, price = 0, title = '', image= '' } = prodData;
   return ({
     type: ADD_TO_STORE,
     payload: {id, price, title, image}

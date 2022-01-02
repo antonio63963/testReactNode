@@ -14,14 +14,14 @@ const Store = () => {
         <h1>Store</h1>
         <div>
           {
-            storeData.items.map( item => (
-              <StoreItem product={item} />
+            storeData.items.map( (item, ind) => (
+              <StoreItem props={{id:item.id, ind}} />
             ))
           }
         </div>
         <hr></hr>
         <h2 style={{margin: 0}}>Total:</h2>
-        <h3>{storeData.total}</h3>
+        <h3>{storeData.total.toFixed(2)}</h3>
         <button onClick={() => navigate('/products')}>Сontinue shopping</button>
       </div>
     </>

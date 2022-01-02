@@ -107,7 +107,7 @@ const reducer = (state = initialState, action) => {
             items: {$push: [selectedProduct]}
           }
         });
-        // newState.store.generalAmount = newState.store.generalAmount + 1;
+
         increaseStoreAmount(newState);
         return newState;
       } else {
@@ -115,7 +115,8 @@ const reducer = (state = initialState, action) => {
           {items: {[isExist.ind]: {amount: {$set: isExist.amount}}}}
         });
         increaseStoreAmount(newState);
-        // newState.store.generalAmount = newState.store.generalAmount + 1;
+        console.log('for store: ', newState)
+
         return newState;
       };
     }
