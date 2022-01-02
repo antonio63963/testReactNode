@@ -1,0 +1,14 @@
+.bodyCardWrapper {
+  padding: 10px;
+  min-width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.buttonsWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
