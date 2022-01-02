@@ -7,7 +7,7 @@ const StoreIcon = () => {
   return (
   
     <Badge className={style.badge} count={generalAmount} overflowCount={10}>
-      <i className="fas fa-shopping-basket"></i>
+      <i style={{fontSize: '30px', color: 'white'}} className="fas fa-shopping-basket"></i>
       {/* <Avatar shape="square" size="large" /> */}
     </Badge>
 

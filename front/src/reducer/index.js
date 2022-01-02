@@ -148,6 +148,7 @@ const reducer = (state = initialState, action) => {
           items: {$splice: [[ind, 1]]}
         }
       });
+      setStoreAmount(newState);
       return newState;
     };
 
