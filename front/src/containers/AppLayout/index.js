@@ -1,26 +1,25 @@
 import { React, useState } from 'react';
-import { getAllCategories } from '../../reducer/actions';
-import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
-  TeamOutlined,
-  UserOutlined,
 } from '@ant-design/icons';
 import StoreIcon from '../../components/StoreIcon';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
-
 
 
 
 export default function AppLayout({children}) {
+  // NAVIGATION 
+  const navigate = useNavigate();
+  const handlerRoute = (route) => {
+    navigate(route);
+  };
   const [ collapsed, setCollapsed ] = useState(false);
-  const dispatch = useDispatch();
   const onCollapse = close => {
     setCollapsed(close);
   };
@@ -36,27 +35,17 @@ export default function AppLayout({children}) {
             <div className="logo" />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
               <Menu.Item key="1" icon={<PieChartOutlined />}>
-                <NavLink to='/'> Actions </NavLink>
+                <span onClick={() => handlerRoute('/')}>Actions</span>
               </Menu.Item>
               <Menu.Item key="2" icon={<DesktopOutlined />}>
               <NavLink to='/products'> Products </NavLink>
               </Menu.Item>
-              <NavLink to='/categories'>
-                <SubMenu key="sub1" icon={<UserOutlined />} title="Categories">
-                  <Menu.Item key="3">electronics</Menu.Item>
-                  <Menu.Item key="4">jewelery</Menu.Item>
-                  <Menu.Item key="5">men's clothing</Menu.Item>
-                  <Menu.Item key="7">women's clothing</Menu.Item>
-                </SubMenu>
-              </NavLink>
-              <SubMenu key="sub2" icon={<TeamOutlined />} title="Team">
-                <Menu.Item key="6">Team 1</Menu.Item>
-                <Menu.Item key="8">Team 2</Menu.Item>
-              </SubMenu>
+
+              <Menu.Item key="3">
+                <span onClick={() => handlerRoute('/categories')}>Categories</span>
+              </Menu.Item>
               <Menu.Item key="9" icon={<FileOutlined />}>
-                <NavLink to='/store'>
-                  Store
-                </NavLink>
+                <span onClick={() => handlerRoute('/store')}>Store</span>
               </Menu.Item>
             </Menu>
           </Sider>

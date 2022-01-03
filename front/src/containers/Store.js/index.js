@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import StoreItem from '../../components/StoreItem';
 
 
 const Store = () => {
   const navigate = useNavigate();
   const storeData = useSelector(state => state.store);
-  const dispatch = useDispatch();
+
 
   return (
     <>

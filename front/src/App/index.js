@@ -1,14 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import 'antd/dist/antd.css';
-import style from './App.module.css';
+import './App.module.css';
 import AppLayout from '../containers/AppLayout';
 import Categories from '../containers/Categories';
 import Products from '../containers/Products';
 import ActionCard from '../components/ActionCard'
 import { useDispatch } from 'react-redux';
 import { initStore } from '../reducer/actions';
-import axios from 'axios';
+
 import Store from '../containers/Store.js';
 
 
@@ -19,7 +19,7 @@ function App() {
   useEffect(() => {
    initStore(dispatch);
     
-  }, []);
+  });
   return (
     <AppLayout>
       <Routes>
@@ -29,10 +29,6 @@ function App() {
         <Route exact path='/store' element={<Store />} />
       </Routes>
     </AppLayout>
-
-     
-
-
   );
 }
 

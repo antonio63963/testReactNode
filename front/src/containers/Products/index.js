@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
 import { Row, Col } from 'antd';
-import { getProductsByLimit, getProductById, initStore } from '../../reducer/actions.js'
+import { initStore } from '../../reducer/actions.js'
 import Card from '../../components/card.js';
 import Sprinner from '../../components/Sprinner.js';
 import style from './products.module.css';
@@ -17,7 +16,7 @@ function Products() {
       initStore(dispatch);
     };
     console.log('Productd')
-  }, []);
+  });
   useEffect(() => {
     console.log(store)
 

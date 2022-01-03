@@ -1,4 +1,4 @@
-import update, { extend } from 'immutability-helper';
+import update from 'immutability-helper';
 import { 
   PRODUCT_LOAD_IN_PROGRESS, 
   PRODUCT_LOAD_FAIL, 
@@ -26,7 +26,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
 
   const findFilmIdx = (id) => {
-    return state.products.findIndex(product => product.id == id);
+    return state.products.findIndex(product => product.id === id);
   };
   const setStoreAmount = (newState) => {
     const { items } = newState.store;
@@ -43,11 +43,11 @@ const reducer = (state = initialState, action) => {
 
 
   switch(action.type) {
-    case LOADING: {
+    case LOADING: 
       return update(state, {
         arrProductStatus: {$set: {LOADING}}
       })
-    };
+    
 
     case PRODUCT_LOAD_IN_PROGRESS: {
       const product = {
@@ -76,24 +76,21 @@ const reducer = (state = initialState, action) => {
       return res;
     };
 
-    case LOADING: {
-      return update(state, {$set:{arrProductStatus: action.payload}})
-    };
+    // case LOADING: {
+    //   return update(state, {$set:{arrProductStatus: action.payload}})
+    // };
 
-    case GET_PRODUCTS_BY_LIMIT : {
-
+    case GET_PRODUCTS_BY_LIMIT: 
       return update(state, {
         products: {$set: action.payload.products}, 
         arrProductStatus: {$set: 'SUCCESS'}})
-    };
-
-    case INIT_APP: {
+   
+    case INIT_APP: 
       return update(state, {
         categories: {$set: action.payload.categories},
         products: {$set: action.payload.products},
         arrProductStatus: {$set: 'SUCCESS'}
       })
-    };
 
     case ADD_TO_STORE: {
       const isExist = state.store.items.reduce( (acc, item, ind) => {

@@ -4,7 +4,6 @@ import {
   PRODUCT_LOAD_FAIL, 
   PRODUCT_ADD_BY_ID, 
   GET_PRODUCTS_BY_LIMIT, 
-  LOADING,
   INIT_APP,
   ADD_TO_STORE,
   INCREASE_STORE,
@@ -39,12 +38,6 @@ const resultOfLoadById = async(id) => {
 };
 
 
-
-const startLoading = () => {
-  return ({
-    type: LOADING
-  })
-}
 const actionGetByLimit = async () => {
   console.log('im n limit!!!')
   // const url = `https://fakestoreapi.com/products?limit=${limit}`;

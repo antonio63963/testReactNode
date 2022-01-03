@@ -1,14 +1,12 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {useState} from 'react';
 import { addToStore } from '../reducer/actions';
-// import { Image, Button, Space } from 'antd';
 import { Card, Button } from 'antd';
 import style from './card.module.css'
 const { Meta } = Card;
 
 
 export default function CardProduct({product}) {
-  const storeData = useSelector(state => state.store)
   const dispatch = useDispatch();
   const {id = 0, title = 'some title', price = 1, image, description = 'some description'} = product;
   const prodData = { id, title, price, image };
