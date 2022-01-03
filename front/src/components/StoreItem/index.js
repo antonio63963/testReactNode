@@ -9,13 +9,14 @@ const StoreItem = ({ props }) => {
   const selectedProduct = useSelector(state => state.store.items[ind]);
   const {title, price, amount, image, sum } = selectedProduct;
   const onAdd = () => {
-    console.log('CLICK')
     addToStore({id, ind}, dispatch);
   };
   const onDecrease = () => {
+    console.log('DECEASE: ', id)
     decreaseStore({id, amount}, dispatch)
   };
   const onDelete = () => {
+    console.log('DELETE!!! id: ', id)
     deleteItemFromStore(id, dispatch);
   };
   

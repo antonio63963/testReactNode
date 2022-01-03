@@ -25,8 +25,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 
-  const findFilmIdx = (id) => {
-    return state.products.findIndex(product => product.id === id);
+  const findFilmIdx = (id, arr) => {
+    return arr.findIndex(product => product.id === id);
   };
   const setStoreAmount = (newState) => {
     const { items } = newState.store;
@@ -57,7 +57,7 @@ const reducer = (state = initialState, action) => {
     };
       
     case PRODUCT_LOAD_FAIL: {
-      const ind = findFilmIdx(action.payload.id);
+      const ind = findFilmIdx(action.payload.id, state.items);
       return update(state, { 
         products: { 
           [ind]: { 
@@ -68,7 +68,7 @@ const reducer = (state = initialState, action) => {
     };
 
     case PRODUCT_ADD_BY_ID: {
-      const ind = findFilmIdx(action.payload.product.id);
+      const ind = findFilmIdx(action.payload.product.id, state.items);
       const res = update(state, { products: {[ind]: {
         $set: action.payload.product,
       }}});
@@ -100,7 +100,7 @@ const reducer = (state = initialState, action) => {
         };
         return acc;
       }, {ind: null, amount: null});
-      console.log('REDUCE: ', isExist)
+     
 
       if(isExist.ind === null) {
         const selectedProduct = {...action.payload, amount: 1 }
@@ -117,7 +117,6 @@ const reducer = (state = initialState, action) => {
           {items: {[isExist.ind]: {amount: {$set: isExist.amount}}}}
         });
         setStoreAmount(newState);
-        console.log('for store: ', newState)
 
         return newState;
       };
@@ -126,27 +125,37 @@ const reducer = (state = initialState, action) => {
     case INCREASE_STORE: {
       const { id, amount: oldAmount } = action.payload;
       if(oldAmount === 0) return state;
-      console.log('INcrease: ', oldAmount)
-      const ind = findFilmIdx(id);
-      console.log("inc ind: ", ind)
-      const newState = update(state, { store: {
-        items: {[ind]: {amount: {$set: oldAmount - 1}}}
-      }});
-      setStoreAmount(newState);
-      console.log('inc state: ', newState)
-      return newState;
+      const ind = findFilmIdx(id, state.store.items);
+      console.log('before INc: ', state.store)
+      console.log('INcrease: ', ind)
+      if(ind !== -1) {
+        const newState = update(state, { store: {
+          items: {[ind]: {amount: {$set: oldAmount - 1}}}
+        }});
+        setStoreAmount(newState);
+        console.log('inc state: ', newState)
+        return newState;
+      } else {
+        return state;
+      }
     }
 
     case DELETE_ITEM_FROM_STORE: {
       const { id } = action.payload;
-      const ind = findFilmIdx(id);
-      const newState = update(state, {
-        store: {
-          items: {$splice: [[ind, 1]]}
-        }
-      });
-      setStoreAmount(newState);
-      return newState;
+      const ind = findFilmIdx(id, state.store.items);
+      console.log('ind DEL ITEM: ', ind);
+      if(ind !== -1) {
+        const newState = update(state, {
+          store: {
+            items: {$splice: [[ind, 1]]}
+          }
+        });
+        setStoreAmount(newState);
+        console.log('DEL_reducer: ', newState);
+        return newState;
+      } else {
+        return state;
+      }
     };
 
     default: 
