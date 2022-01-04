@@ -7,7 +7,7 @@ import {
   LOADING,
   INIT_APP,
   ADD_TO_STORE,
-  INCREASE_STORE,
+  DECREASE_STORE,
   DELETE_ITEM_FROM_STORE
 } from '../typesAction';
 
@@ -122,12 +122,18 @@ const reducer = (state = initialState, action) => {
       };
     }
 
-    case INCREASE_STORE: {
+    case DECREASE_STORE: {
       const { id, amount: oldAmount } = action.payload;
-      if(oldAmount === 0) return state;
       const ind = findFilmIdx(id, state.store.items);
-      console.log('before INc: ', state.store)
-      console.log('INcrease: ', ind)
+      if(oldAmount === 1) {
+        const newState = update(state, {
+          store: {
+            items: {$splice: [[ind, 1]]}
+          }
+        });
+        return newState;
+      }
+
       if(ind !== -1) {
         const newState = update(state, { store: {
           items: {[ind]: {amount: {$set: oldAmount - 1}}}
@@ -151,7 +157,6 @@ const reducer = (state = initialState, action) => {
           }
         });
         setStoreAmount(newState);
-        console.log('DEL_reducer: ', newState);
         return newState;
       } else {
         return state;

@@ -6,7 +6,7 @@ import {
   GET_PRODUCTS_BY_LIMIT, 
   INIT_APP,
   ADD_TO_STORE,
-  INCREASE_STORE,
+  DECREASE_STORE,
   DELETE_ITEM_FROM_STORE
 } from '../typesAction';
 
@@ -80,7 +80,7 @@ const actionAddToStore = (prodData) => {
 const actionDecreaseStore = (prodData) => {
   // {id, ind, amount} = prodData
   return ({
-    type: INCREASE_STORE,
+    type: DECREASE_STORE,
     payload: prodData
   })
 };
