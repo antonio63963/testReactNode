@@ -1,8 +1,10 @@
 import { 
   ADD_TO_CART,
   DECREASE_ITEM_AMOUNT,
-  DELETE_CART_ITEM 
+  DELETE_CART_ITEM,
+  REFRESH_CART 
 } from '../typesAction';
+import axios from 'axios';
 
 
 // ACTIONS
@@ -25,6 +27,14 @@ const actionDeleteItem = (id) => {
     payload: {id}
   }
 };
+const actionRefreshCart = async (prodArr) => {
+  const { data } = await axios.post('/api/refreshCart', prodArr);
+  console.log('refreshArr', data);
+  return {
+    type: REFRESH_CART,
+    payload: data
+  }
+};
 
 //ACTION CREATOR
 const addToCart = (id, dispatch) => {
@@ -36,10 +46,14 @@ const decreaseItemAmount = (decreaseData, dispatch) => {
 };
 const deleteCartItem = (id, dispatch) => {
   dispatch(actionDeleteItem(id));
-}
+};
+const refreshCart = async(prodArr, dispatch) => {
+  dispatch(await actionRefreshCart(prodArr));
+};
 
 export {
   addToCart,
   decreaseItemAmount,
-  deleteCartItem
+  deleteCartItem,
+  refreshCart
 }

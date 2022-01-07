@@ -21,6 +21,21 @@ router.get('/products', async(req, res) => {
   res.send({status: 'ok', payload: data});
 
 });
+router.post('/refreshCart', (req, res) => {
+  console.log('im in refreshCart', req.body);
+  const refreshCart = req.body.map(async(item) => {
+    const refreshItem = await axios.get(`https://fakestoreapi.com/products/${item.id}`);
+    return refreshItem ? 
+      {
+        id: refreshItem.id, 
+        title: refreshItem.title, 
+        amount: refreshItem.amount, 
+        image: refreshItem.image
+      } : 
+      null;
+  });
+  res.send({status: 'ok', payload: refreshCart});
+});
 
 // router.get('/addProdID/:id', async(req, res) => {
 //   const {id} = req.params;

@@ -1,5 +1,10 @@
 import update from 'immutability-helper';
-import { ADD_TO_CART, DECREASE_ITEM_AMOUNT, DELETE_CART_ITEM } from '../typesAction';
+import { 
+  ADD_TO_CART, 
+  DECREASE_ITEM_AMOUNT, 
+  DELETE_CART_ITEM,
+  REFRESH_CART
+ } from '../typesAction';
 
 const initialState = {
     items: [], 
@@ -64,6 +69,13 @@ const reducer = (state = initialState, action) => {
     } else {
       return state;
     };
+  };
+
+  case REFRESH_CART: {
+    if(action.payload.status !== 'ok') return state;
+    const newState = update(state, {
+      items: {$set: [action.payload.payload.refreshCart]}
+    })
   };
 
   default: 

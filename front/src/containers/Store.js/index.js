@@ -1,17 +1,18 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import StoreItem from '../../components/StoreItem';
-
-const initCart = () => {
-  
-}
+import { refreshCart } from '../../reducer/actionsCart';
 
 const Store = () => {
+
   const navigate = useNavigate();
-  // const storeData = useSelector(state => state.shop.store);
   const data = useSelector(state => state.cart.items);
-  
+  const dispatch = useDispatch();
+  const onRefreshCart = (prodArray) => {
+    console.log('refresh')
+    refreshCart(prodArray, dispatch);
+  };
   useEffect(() => {
     console.log('STORE:', data)
 
@@ -20,7 +21,7 @@ const Store = () => {
   return (
     <>
       <div>
-        <h1>Store</h1>
+        <h1>Cart</h1>
         <div>
           {
             data.map( (item, ind) => (
@@ -38,7 +39,12 @@ const Store = () => {
           }, 0).toFixed(2) 
         }
       </h3>
-        <button onClick={() => navigate('/products')}>Сontinue shopping</button>
+        <button type="primary" onClick={() => navigate('/products')}>Сontinue shopping</button>
+        {
+          data.length > 0 ? 
+          (<button type="dashed" onClick={() => onRefreshCart(data)}>Refresh cart</button>) : 
+          (<button>Cart is empty</button>)
+        } 
       </div>
     </>
   )
