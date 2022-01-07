@@ -5,7 +5,7 @@ import StoreItem from '../../components/StoreItem';
 
 const Store = () => {
   const navigate = useNavigate();
-  const storeData = useSelector(state => state.store);
+  const storeData = useSelector(state => state.shop.store);
 
 
   return (

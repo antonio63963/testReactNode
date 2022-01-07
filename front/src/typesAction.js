@@ -8,3 +8,5 @@ export const INIT_APP = 'INIT_APP';
 export const ADD_TO_STORE = 'ADD_TO_STORE';
 export const DECREASE_STORE = 'DECREASE_STORE';
 export const DELETE_ITEM_FROM_STORE = 'DELETE_ITEM_FROM_STORE';
+
+export const ADD_TO_CART = 'ADD_TO_CART';

@@ -13,14 +13,21 @@ import {
 
 
 const initialState = {
-  categories: [],
-  products: [],
   store: {
     items: [], 
     generalAmount: 0,
     total: 0
   }
 };
+// const initialState = {
+//   categories: [],
+//   products: [],
+//   store: {
+//     items: [], 
+//     generalAmount: 0,
+//     total: 0
+//   }
+// };
 
 
 const reducer = (state = initialState, action) => {
@@ -81,6 +88,7 @@ const reducer = (state = initialState, action) => {
     // };
 
     case GET_PRODUCTS_BY_LIMIT: 
+    console.log("GET_PRODUCTS_BY_LIMIT: ", state)
       return update(state, {
         products: {$set: action.payload.products}, 
         arrProductStatus: {$set: 'SUCCESS'}})

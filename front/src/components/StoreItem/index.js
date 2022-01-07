@@ -6,7 +6,7 @@ import style from './storeItem.module.css';
 const StoreItem = ({ props }) => {
   const { id, ind } = props;
   const dispatch = useDispatch();
-  const selectedProduct = useSelector(state => state.store.items[ind]);
+  const selectedProduct = useSelector(state => state.shop.store.items[ind]);
   const {title, price, amount, image, sum } = selectedProduct;
   const onAdd = () => {
     addToStore({id, ind}, dispatch);

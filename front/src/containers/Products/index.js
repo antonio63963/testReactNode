@@ -8,7 +8,7 @@ import style from './products.module.css';
 
 function Products() {
 
-  const store = useSelector( state => state);
+  const store = useSelector( state => state.shop);
   const dispatch = useDispatch();
   console.log('Productd_out')
   useEffect(() => {
@@ -16,7 +16,7 @@ function Products() {
       initStore(dispatch);
     };
     console.log('Productd')
-  });
+  }, []);
   useEffect(() => {
     console.log(store)
 

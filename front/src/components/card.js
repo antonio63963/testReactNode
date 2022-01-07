@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import {useState} from 'react';
 import { addToStore } from '../reducer/actions';
+import { addToCart } from '../reducer/actionsCart'
 import { Card, Button } from 'antd';
 import style from './card.module.css'
 const { Meta } = Card;
@@ -14,6 +15,7 @@ export default function CardProduct({product}) {
   const [ isHover, setIsHover ] = useState(false);
   const onAddToStore = (prodData, dispatch) => {
     addToStore(prodData, dispatch);
+    addToCart( id, dispatch)
     // console.log('onAddToStore: ', storeData);
   };
   return (
