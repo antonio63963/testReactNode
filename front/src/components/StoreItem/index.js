@@ -1,15 +1,19 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToStore, decreaseStore, deleteItemFromStore } from '../../reducer/actions';
+import { addToCart } from '../../reducer/actionsCart';
 import { Image, Button, Space } from 'antd';
 import style from './storeItem.module.css';
 
 const StoreItem = ({ props }) => {
   const { id, ind } = props;
+
   const dispatch = useDispatch();
-  const selectedProduct = useSelector(state => state.shop.store.items[ind]);
-  const {title, price, amount, image, sum } = selectedProduct;
+  const selectedProduct = useSelector(state => state.cart.items[ind]);
+  console.log('SELECTED PROD: ', props)
+  const {title, price, amount, image } = selectedProduct;
   const onAdd = () => {
-    addToStore({id, ind}, dispatch);
+    addToCart({id, ind}, dispatch);
   };
   const onDecrease = () => {
     console.log('DECEASE: ', id)
@@ -42,7 +46,7 @@ const StoreItem = ({ props }) => {
           <h3 className={style.propName}>Amount:</h3>
           <span>{amount}</span>
           <h2 className={style.propName}>Sum:</h2>
-          <span>{sum}</span>
+          <span>{amount * price}</span>
         </div>
         <div className={style.buttonsWrapper}>
           <Button

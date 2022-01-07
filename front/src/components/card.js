@@ -15,7 +15,7 @@ export default function CardProduct({product}) {
   const [ isHover, setIsHover ] = useState(false);
   const onAddToStore = (prodData, dispatch) => {
     addToStore(prodData, dispatch);
-    addToCart( id, dispatch)
+    addToCart( prodData, dispatch)
     // console.log('onAddToStore: ', storeData);
   };
   return (

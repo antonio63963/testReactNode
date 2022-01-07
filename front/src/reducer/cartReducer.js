@@ -10,13 +10,26 @@ const initialState = {
 
 
 const reducer = (state = initialState, action) => {
- switch (action.type) {
+  const findIdxById = (id) => {
+    return state.items.findIndex(item => item.id === id);
+  };
+
+  switch (action.type) {
   case ADD_TO_CART: { 
-    // const addedProd = {...action.payload, amount: 1}
-    const newState = update(state, {
-      items: {$push: [action.payload], amount: {$set: 1}}
-    });
-    return newState;
+    const idx = findIdxById(action.payload.id);
+    console.log('cart add: ', idx);
+    if(idx === -1) {
+      const newState = update(state, {
+        items: {$push: [{...action.payload, amount: 1}]},
+      });
+      return newState;
+    }else {
+      const newAmount = state.items[idx].amount + 1;
+      const newState = update(state, {
+        items: { [idx]: { amount: {$set: newAmount}}}
+      });
+      return newState;
+    }
   };
 
   default: 
@@ -24,4 +37,6 @@ const reducer = (state = initialState, action) => {
  }
 
 };
- export default reducer;
+
+
+export default reducer;

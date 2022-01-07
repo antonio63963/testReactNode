@@ -1,9 +1,10 @@
 import { ADD_TO_CART } from '../typesAction';
 
-const actionAddToCart = (id) => {
+const actionAddToCart = (prodData) => {
+  const { id, price = 0, title = '', image= '' } = prodData;
   return {
     type: ADD_TO_CART,
-    payload: {id}
+    payload: {id, price, title, image}
   }
 };
 

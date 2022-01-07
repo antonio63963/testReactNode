@@ -22,7 +22,7 @@ const startLoadProduct = async(id) => {
 const resultOfLoadById = async(id) => {
   // const url = `https://fakestoreapi.com/products/${ id }`;
   const result = await axios.get(`/addProdID/${id}`);
-  console.log(result.data)
+  // console.log(result.data)
   if(result.status !== 200) {
     return({
       type: PRODUCT_LOAD_FAIL,
@@ -39,10 +39,10 @@ const resultOfLoadById = async(id) => {
 
 
 const actionGetByLimit = async () => {
-  console.log('im n limit!!!')
+  // console.log('im n limit!!!')
   // const url = `https://fakestoreapi.com/products?limit=${limit}`;
   const result = await axios.get('/api/products');
-  console.log('action by limit: ', result)
+  // console.log('action by limit: ', result)
   if(result.status !== 200) {
     return({
       type: PRODUCT_LOAD_FAIL, 
@@ -105,10 +105,10 @@ const initStore = async(dispatch) => {
   // dispatch(startLoading())
   const { payload } = await actionGetByLimit();
   const { products } = payload;
-  console.log('products', products);
+  // console.log('products', products);
   const action = await actionCategories();
   action.payload = {...action.payload, products};
-  console.log('action: ', action);
+  // console.log('action: ', action);
   dispatch(action);
 };
 const addToStore = (prodData, dispatch) => {
