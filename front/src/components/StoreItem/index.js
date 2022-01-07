@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addToStore, decreaseStore, deleteItemFromStore } from '../../reducer/actions';
-import { addToCart, decreaseItemAmount } from '../../reducer/actionsCart';
+import { addToCart, decreaseItemAmount, deleteCartItem } from '../../reducer/actionsCart';
 import { Image, Button, Space } from 'antd';
 import style from './storeItem.module.css';
 
@@ -20,7 +20,7 @@ const StoreItem = ({ props }) => {
   };
   const onDelete = () => {
     console.log('DELETE!!! id: ', id)
-    deleteItemFromStore(id, dispatch);
+    deleteCartItem(id, dispatch);
   };
   
   return (

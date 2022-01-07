@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import { ADD_TO_CART, DECREASE_ITEM_AMOUNT } from '../typesAction';
+import { ADD_TO_CART, DECREASE_ITEM_AMOUNT, DELETE_CART_ITEM } from '../typesAction';
 
 const initialState = {
     items: [], 
@@ -33,7 +33,6 @@ const reducer = (state = initialState, action) => {
 
   case DECREASE_ITEM_AMOUNT: {
     const {id, amount: oldAmount} = action.payload;
-    console.log('dec red idx: ', state.items)
     const idx = findIdxById(id);
     if(oldAmount === 1) {
       const newState = update(state, {  
@@ -41,7 +40,7 @@ const reducer = (state = initialState, action) => {
       });
       return newState;
     };
-
+    
     if(idx !== -1) {
       const newState = update(state, {
         items: {[idx]: {amount: {$set: oldAmount - 1}}}
@@ -50,11 +49,26 @@ const reducer = (state = initialState, action) => {
     } else {
       console.log('Элемент не найден')
     }
-  }
+  };
+  
+  case DELETE_CART_ITEM: {
+    const {id} = action.payload;
+    
+    console.log('delllll: ', state.items)
+    const idx = findIdxById(id);
+    if(idx !== -1) {
+      const newState = update(state, {  
+        items: {$splice: [[idx, 1]]} 
+      });
+      return newState;
+    } else {
+      return state;
+    };
+  };
 
   default: 
     return state;
- }
+ };
 
 };
 
