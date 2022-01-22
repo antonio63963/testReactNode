@@ -1,12 +1,23 @@
+.space {
+  display: flex;
+}
+
 .bodyCardWrapper {
   padding: 10px;
   min-width: 200px;
-  height: 200px;
+  /* height: 200px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
+  
 }
-
+.imageWrapper {
+  padding: 10px;
+  width: 200px;
+  min-width: 200px;
+  display: flex;
+}
 
 
 .btnAction {
@@ -15,5 +26,35 @@
 
 .propName {
   padding: 0;
-  margin: 0;
+  margin: 10px 15px;
+}
+.cardLine {
+  display: flex;
+  align-items: center;
+}
+.cardLineTitle {
+  display: flex;
+  align-items: center;
+}
+.buttonsWrapper {
+  margin-left: 15px;
+}
+
+@media screen and (max-width: 822px) {
+  .space {
+    flex-direction: column;
+  }
+  .imageWrapper {
+    width: 100%;
+    justify-content: center;
+    padding: 0;
+  }
+  .bodyCardWrapper {
+    align-items: center;
+    padding: 10px 30px 30px 30px;
+  }
+  .cardLine {
+    flex-direction: column;
+  }
+
 }

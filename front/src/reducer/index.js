@@ -8,7 +8,9 @@ import {
   INIT_APP,
   ADD_TO_STORE,
   DECREASE_STORE,
-  DELETE_ITEM_FROM_STORE
+  DELETE_ITEM_FROM_STORE,
+  GET_BY_CATEGORY
+
 } from '../typesAction';
 
 
@@ -17,7 +19,9 @@ const initialState = {
     items: [], 
     generalAmount: 0,
     total: 0
-  }
+  }, 
+  categories: [],
+  products: [],
 };
 // const initialState = {
 //   categories: [],
@@ -63,25 +67,25 @@ const reducer = (state = initialState, action) => {
       return update(state, {products: { $push: [product] }});
     };
       
-    case PRODUCT_LOAD_FAIL: {
-      const ind = findFilmIdx(action.payload.id, state.items);
-      return update(state, { 
-        products: { 
-          [ind]: { 
-            status: {$set: 'fail'}
-          }
-        }
-      });
-    };
+    // case PRODUCT_LOAD_FAIL: {
+    //   const ind = findFilmIdx(action.payload.id, state.items);
+    //   return update(state, { 
+    //     products: { 
+    //       [ind]: { 
+    //         status: {$set: 'fail'}
+    //       }
+    //     }
+    //   });
+    // };
 
-    case PRODUCT_ADD_BY_ID: {
-      const ind = findFilmIdx(action.payload.product.id, state.items);
-      const res = update(state, { products: {[ind]: {
-        $set: action.payload.product,
-      }}});
-      console.log('add : ', ind, res);
-      return res;
-    };
+    // case PRODUCT_ADD_BY_ID: {
+    //   const ind = findFilmIdx(action.payload.product.id, state.items);
+    //   const res = update(state, { products: {[ind]: {
+    //     $set: action.payload.product,
+    //   }}});
+    //   console.log('add : ', ind, res);
+    //   return res;
+    // };
 
     // case LOADING: {
     //   return update(state, {$set:{arrProductStatus: action.payload}})
@@ -94,83 +98,89 @@ const reducer = (state = initialState, action) => {
         arrProductStatus: {$set: 'SUCCESS'}})
    
     case INIT_APP: 
+    console.log('reducer init app: ', action.payload);
       return update(state, {
         categories: {$set: action.payload.categories},
         products: {$set: action.payload.products},
         arrProductStatus: {$set: 'SUCCESS'}
       })
 
-    case ADD_TO_STORE: {
-      const isExist = state.store.items.reduce( (acc, item, ind) => {
-        if(item.id === action.payload.id) {
-          acc.ind = ind;
-          acc.amount = item.amount + 1;
-        };
-        return acc;
-      }, {ind: null, amount: null});
+    // case ADD_TO_STORE: {
+    //   const isExist = state.store.items.reduce( (acc, item, ind) => {
+    //     if(item.id === action.payload.id) {
+    //       acc.ind = ind;
+    //       acc.amount = item.amount + 1;
+    //     };
+    //     return acc;
+    //   }, {ind: null, amount: null});
      
 
-      if(isExist.ind === null) {
-        const selectedProduct = {...action.payload, amount: 1 }
-        const newState = update(state, {
-          store: {
-            items: {$push: [selectedProduct]}
-          }
-        });
+    //   if(isExist.ind === null) {
+    //     const selectedProduct = {...action.payload, amount: 1 }
+    //     const newState = update(state, {
+    //       store: {
+    //         items: {$push: [selectedProduct]}
+    //       }
+    //     });
 
-        setStoreAmount(newState);
-        return newState;
-      } else {
-        const newState = update(state, { store:
-          {items: {[isExist.ind]: {amount: {$set: isExist.amount}}}}
-        });
-        setStoreAmount(newState);
+    //     setStoreAmount(newState);
+    //     return newState;
+    //   } else {
+    //     const newState = update(state, { store:
+    //       {items: {[isExist.ind]: {amount: {$set: isExist.amount}}}}
+    //     });
+    //     setStoreAmount(newState);
 
-        return newState;
-      };
+    //     return newState;
+    //   };
+    // }
+
+    // case DECREASE_STORE: {
+    //   const { id, amount: oldAmount } = action.payload;
+    //   const ind = findFilmIdx(id, state.store.items);
+    //   if(oldAmount === 1) {
+    //     const newState = update(state, {
+    //       store: {
+    //         items: {$splice: [[ind, 1]]}
+    //       }
+    //     });
+    //     return newState;
+    //   }
+
+    //   if(ind !== -1) {
+    //     const newState = update(state, { store: {
+    //       items: {[ind]: {amount: {$set: oldAmount - 1}}}
+    //     }});
+    //     setStoreAmount(newState);
+    //     console.log('inc state: ', newState)
+    //     return newState;
+    //   } else {
+    //     return state;
+    //   }
+    // }
+
+    // case DELETE_ITEM_FROM_STORE: {
+    //   const { id } = action.payload;
+    //   const ind = findFilmIdx(id, state.store.items);
+    //   console.log('ind DEL ITEM: ', ind);
+    //   if(ind !== -1) {
+    //     const newState = update(state, {
+    //       store: {
+    //         items: {$splice: [[ind, 1]]}
+    //       }
+    //     });
+    //     setStoreAmount(newState);
+    //     return newState;
+    //   } else {
+    //     return state;
+    //   }
+    // };
+    case GET_BY_CATEGORY: {
+      console.log(GET_BY_CATEGORY);
+      return update(state, {
+        products: {$set: action.payload}
+      });
     }
-
-    case DECREASE_STORE: {
-      const { id, amount: oldAmount } = action.payload;
-      const ind = findFilmIdx(id, state.store.items);
-      if(oldAmount === 1) {
-        const newState = update(state, {
-          store: {
-            items: {$splice: [[ind, 1]]}
-          }
-        });
-        return newState;
-      }
-
-      if(ind !== -1) {
-        const newState = update(state, { store: {
-          items: {[ind]: {amount: {$set: oldAmount - 1}}}
-        }});
-        setStoreAmount(newState);
-        console.log('inc state: ', newState)
-        return newState;
-      } else {
-        return state;
-      }
-    }
-
-    case DELETE_ITEM_FROM_STORE: {
-      const { id } = action.payload;
-      const ind = findFilmIdx(id, state.store.items);
-      console.log('ind DEL ITEM: ', ind);
-      if(ind !== -1) {
-        const newState = update(state, {
-          store: {
-            items: {$splice: [[ind, 1]]}
-          }
-        });
-        setStoreAmount(newState);
-        return newState;
-      } else {
-        return state;
-      }
-    };
-
     default: 
       return state
   }

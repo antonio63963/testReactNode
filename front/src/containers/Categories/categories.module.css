@@ -1,0 +1,13 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  /* height: 385px; */
+  cursor: pointer;
+}
+.imgWrapper {
+  display: flex;
+  max-width: 400px;
+  /* height: 100%; */
+
+  overflow: hidden;
+}

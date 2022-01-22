@@ -31,11 +31,11 @@ function Products() {
         <Sprinner className={style.spinner} style={{position: 'absolute', bottom: '50px'}}/>
       </div>) :
         <Row gutter={16} >
-              {store.products.map(prod =>  (
-                <Col key={prod.id} className={style.card_margin}>
-                  <Card product={prod} />
-                </Col>
-              ))}
+          {store.products.map(prod =>  (
+            <Col key={prod.id} className={style.card_margin}>
+              <Card product={prod} />
+            </Col>
+          ))}
         </Row>
       }
     </div>

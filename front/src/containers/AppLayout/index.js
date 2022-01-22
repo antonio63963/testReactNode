@@ -1,66 +1,41 @@
-import { React, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-  DesktopOutlined,
-  PieChartOutlined,
-  FileOutlined,
-} from '@ant-design/icons';
 import StoreIcon from '../../components/StoreIcon';
-
+import style from './appLayout.module.css';
 const { Header, Content, Footer, Sider } = Layout;
 
 
 
 export default function AppLayout({children}) {
-  // NAVIGATION 
+  const [ selectKey, setSelectKey ] = useState(1)
   const navigate = useNavigate();
-  const handlerRoute = (route) => {
-    navigate(route);
-  };
-  const [ collapsed, setCollapsed ] = useState(false);
-  const onCollapse = close => {
-    setCollapsed(close);
-  };
-
+  const onMenuItem = (link, key) => {
+    navigate(`${link}`);
+    setSelectKey(key);
+  }
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-       <Header className="site-layout-background" style={{ padding: 0 }} >
-         HELL(O)
-         <StoreIcon />
+    <Layout style={{ minHeight: '100vh', maxWidth: '80%', textAlign: 'center' }}>
+       <Header className={style.header} style={{ padding: 0 }} >
+        <div className={style.headerRightPart}>
+            <Menu theme="dark" mode="horizontal" style={{marginRight: '30px'}} defaultSelectedKeys={[`${selectKey}`]}>
+              <Menu.Item key="1" onClick={() => onMenuItem('/', 1)}>Actions</Menu.Item>
+              <Menu.Item key="2" onClick={() => onMenuItem('/products', 2)}>Products</Menu.Item>
+              <Menu.Item key="3" onClick={() => onMenuItem('/categories', 3)}>Categories</Menu.Item>
+            </Menu>
+            <StoreIcon />
+        </div>
        </Header>
         <Layout>
-          <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-            <div className="logo" />
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-              <Menu.Item key="1" icon={<PieChartOutlined />}>
-                <span onClick={() => handlerRoute('/')}>Actions</span>
-              </Menu.Item>
-              <Menu.Item key="2" icon={<DesktopOutlined />}>
-              <NavLink to='/products'> Products </NavLink>
-              </Menu.Item>
-
-              <Menu.Item key="3">
-                <span onClick={() => handlerRoute('/categories')}>Categories</span>
-              </Menu.Item>
-              <Menu.Item key="9" icon={<FileOutlined />}>
-                <span onClick={() => handlerRoute('/store')}>Store</span>
-              </Menu.Item>
-            </Menu>
-          </Sider>
+      
           <Layout className="site-layout">
 {/* CONTENT */}
             <Content style={{ margin: '0 16px' }}>
-              <Breadcrumb style={{ margin: '16px 0' }}>
-                <Breadcrumb.Item>User</Breadcrumb.Item>
-                <Breadcrumb.Item>Bill</Breadcrumb.Item>
-              </Breadcrumb>
-              <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+              <div className="site-layout-background" style={{ padding: 24, minHeight: 360, justifyContent: 'center' }}>
                 {children}
               </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            <Footer style={{ textAlign: 'center', marginTop: '300px' }}>Ant Design ©2018 Created by Ant UED</Footer>
           </Layout>
         </Layout>
       </Layout>

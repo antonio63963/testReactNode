@@ -7,7 +7,8 @@ import {
   INIT_APP,
   ADD_TO_STORE,
   DECREASE_STORE,
-  DELETE_ITEM_FROM_STORE
+  DELETE_ITEM_FROM_STORE,
+  GET_BY_CATEGORY
 } from '../typesAction';
 
 
@@ -20,7 +21,6 @@ const startLoadProduct = async(id) => {
 };
 
 const resultOfLoadById = async(id) => {
-  // const url = `https://fakestoreapi.com/products/${ id }`;
   const result = await axios.get(`/addProdID/${id}`);
   // console.log(result.data)
   if(result.status !== 200) {
@@ -40,7 +40,6 @@ const resultOfLoadById = async(id) => {
 
 const actionGetByLimit = async () => {
   // console.log('im n limit!!!')
-  // const url = `https://fakestoreapi.com/products?limit=${limit}`;
   const result = await axios.get('/api/products');
   // console.log('action by limit: ', result)
   if(result.status !== 200) {
@@ -56,17 +55,18 @@ const actionGetByLimit = async () => {
 };
 
 const actionCategories = async () => {
-  const result = await axios.get('https://fakestoreapi.com/products/categories');
-  if(result.status !== 200) {
+  const {data} = await axios.get('/api/categories');
+  console.log("Categories:++++", data);
+  if(data.status !== 'ok') {
     return({ 
       type: PRODUCT_LOAD_FAIL
     })
   };
-  const action = {
+  return {
     type: INIT_APP,
-    payload: { categories: result.data}
+    payload: { categories: data.payload.categories}
   }
-  return action;
+
 };
 
 const actionAddToStore = (prodData) => {
@@ -91,7 +91,15 @@ const actionDeleteItemStore = (id) => {
     payload: {id}
   });
 };
-
+//GET_CATEGORIES
+const actionGetByCategory = async(catName) => {
+  const { data } = await axios.get(`https://fakestoreapi.com/products/category/${catName}`);
+  console.log("Categories: =======", data);
+  return {
+    type: GET_BY_CATEGORY,
+    payload: data
+  }
+}
 // COMPOSITONS
 const getProductById = async(id, dispatch) => {
   dispatch(await startLoadProduct(id));
@@ -120,7 +128,10 @@ const decreaseStore = (prodData, dispatch) => {
 const deleteItemFromStore = (id, dispatch) => {
   dispatch(actionDeleteItemStore(id));
 };
-
+const getByCategory = async(catName, dispatch, cb) => {
+  dispatch(await actionGetByCategory(catName));
+  return cb();
+}
 
 
 
@@ -130,5 +141,6 @@ export {
   initStore,
   addToStore,
   decreaseStore,
-  deleteItemFromStore
+  deleteItemFromStore,
+  getByCategory
 }

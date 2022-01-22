@@ -3,6 +3,7 @@ export const PRODUCT_LOAD_FAIL = 'PRODUCT_LOAD_FAIL';
 export const PRODUCT_ADD_BY_ID = 'PRODUCT_ADD_BY_ID';
 export const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID';
 export const GET_PRODUCTS_BY_LIMIT = 'GET_PRODUCTS_BY_LIMIT';
+export const GET_BY_CATEGORY = 'GET_BY_CATEGORY';
 export const LOADING = 'LOADING';
 export const INIT_APP = 'INIT_APP';
 export const ADD_TO_STORE = 'ADD_TO_STORE';

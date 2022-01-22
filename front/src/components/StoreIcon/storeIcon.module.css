@@ -1,4 +1,5 @@
 .badge {
   margin-left: auto;
+  cursor: pointer;
   /* align-self: right; */
 }

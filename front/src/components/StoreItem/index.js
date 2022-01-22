@@ -1,8 +1,7 @@
-import { useState } from 'react';
+
 import { useSelector, useDispatch } from 'react-redux';
-import { addToStore, decreaseStore, deleteItemFromStore } from '../../reducer/actions';
 import { addToCart, decreaseItemAmount, deleteCartItem } from '../../reducer/actionsCart';
-import { Image, Button, Space } from 'antd';
+import { Image, Button } from 'antd';
 import style from './storeItem.module.css';
 
 const StoreItem = ({ props }) => {
@@ -24,28 +23,38 @@ const StoreItem = ({ props }) => {
   };
   
   return (
-    <Space size={12}>
+    <div className={style.space} >
+      <div className={style.imageWrapper} >
       <Image
-        width={200}
+        // width={200}
         src={image}
         placeholder={
           <Image
             preview={false}
             src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200"
-            width={200}
+            // width={200}
           />
         }
       />
+      </div>
      <div className={style.bodyCardWrapper}>
         <div>
-          <h3 className={style.propName}>Title: </h3>
-          <span>{title}</span>
-          <h3 className={style.propName}>Price: {price}</h3>
-          <span>{price}</span>
-          <h3 className={style.propName}>Amount:</h3>
-          <span>{amount}</span>
-          <h2 className={style.propName}>Sum:</h2>
-          <span>{amount * price}</span>
+          <div className={style.cardLine}>
+            <h3 className={style.propName}>Title: </h3>
+            <p style={{textAlign: 'center'}}>{title}</p>
+          </div>
+         <div className={style.cardLine}>
+            <h3 className={style.propName}>Price</h3>
+            <span>${price}</span>
+         </div>
+          <div className={style.cardLine}>
+            <h3 className={style.propName}>Amount:</h3>
+            <span>{amount}</span>
+          </div>
+          <div className={style.cardLine}>
+            <h2 className={style.propName}>Sum:</h2>
+            <span>${amount * price}</span>
+          </div>
         </div>
         <div className={style.buttonsWrapper}>
           <Button
@@ -71,7 +80,7 @@ const StoreItem = ({ props }) => {
           </Button>
         </div>
      </div>
-    </Space>
+    </div>
   )
 };
 

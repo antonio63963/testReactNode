@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px !important;
+}
+.headerRightPart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+}
