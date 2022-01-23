@@ -1,0 +1,9 @@
+.row {
+  background-color: #fff ;
+  margin: 20px;
+}
+@media screen and (max-width: 355px) {
+  .row {
+    margin: 20px 0;
+  }
+}

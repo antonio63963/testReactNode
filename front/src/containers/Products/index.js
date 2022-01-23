@@ -30,9 +30,9 @@ function Products() {
       (<div className={style.prodWrapper}>
         <Sprinner className={style.spinner} style={{position: 'absolute', bottom: '50px'}}/>
       </div>) :
-        <Row gutter={16} >
+        <Row justify={"center"} gutter={16} >
           {store.products.map(prod =>  (
-            <Col key={prod.id} className={style.card_margin}>
+            <Col xs={22}  md={11} lg={8} xl={6} xxl={4} key={prod.id} className={style.card_margin}>
               <Card product={prod} />
             </Col>
           ))}

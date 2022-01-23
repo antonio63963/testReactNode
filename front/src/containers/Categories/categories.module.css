@@ -3,6 +3,7 @@
   flex-direction: column;
   /* height: 385px; */
   cursor: pointer;
+  margin-bottom: 20px;
 }
 .imgWrapper {
   display: flex;

@@ -5,9 +5,43 @@
   justify-content: space-between;
   padding: 0 30px !important;
 }
+.menu {
+  margin-right: 30px !important;
+}
 .headerRightPart {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-left: auto;
+}
+
+
+.mainLayout {
+  min-height: 100vh;
+  max-width: 80%;
+  text-align: center;
+}
+.mobile {
+  display: none !important;
+}
+
+@media screen and (max-width: 480px) {
+  .mainLayout {
+    max-width: 100%;
+  }
+  .header {
+    padding: 0 !important;
+  }
+  .headerRightPart { 
+    padding: 0 20px;
+  }
+  .menu {
+    margin-right: 0px !important;
+  }
+  .desktop {
+    display: none !important;
+  }
+  .mobile {
+    display: flex !important;
+  }
 }

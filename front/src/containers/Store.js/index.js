@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col, Typography } from 'antd';
 import StoreItem from '../../components/StoreItem';
 import { refreshCart } from '../../reducer/actionsCart';
-
+import style from './store.module.css';
 const { Title } = Typography;
 
 const Store = () => {
@@ -27,7 +27,7 @@ const Store = () => {
         <div>
           {
             data.map( (item, ind) => (
-              <Row key={`storeRow${ind}`} style={{backgroundColor: '#fff', margin: '20px'}}>
+              <Row key={`storeRow${ind}`} className={style.row} >
                 <Col>
                   <StoreItem props={{id:item.id, ind}} key={`storeItem${ind}`} />
                 </Col>

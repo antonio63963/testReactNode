@@ -41,19 +41,19 @@ const StoreItem = ({ props }) => {
         <div>
           <div className={style.cardLine}>
             <h3 className={style.propName}>Title: </h3>
-            <p style={{textAlign: 'center'}}>{title}</p>
+            <p className={style.title} style={{textAlign: 'center'}}>{title}</p>
           </div>
          <div className={style.cardLine}>
             <h3 className={style.propName}>Price</h3>
-            <span>${price}</span>
+            <p className={style.title}>${price}</p>
          </div>
           <div className={style.cardLine}>
             <h3 className={style.propName}>Amount:</h3>
-            <span>{amount}</span>
+            <p className={style.title}>{amount}</p>
           </div>
           <div className={style.cardLine}>
             <h2 className={style.propName}>Sum:</h2>
-            <span>${amount * price}</span>
+            <p className={style.title}>${amount * price}</p>
           </div>
         </div>
         <div className={style.buttonsWrapper}>

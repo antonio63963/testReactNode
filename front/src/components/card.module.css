@@ -16,7 +16,8 @@
 }
 .card {
   position: relative;
-
+  display: flex;
+  justify-content: center;
 }
 
 .card>.focussedCard {

@@ -36,9 +36,12 @@ export default function CardProduct({product}) {
       >
       <Meta title={ title } />
         ${price}
+        <div>
+        <Button type="primary" onClick={() => onAddToStore(prodData, dispatch)}>Add to store</Button>
+      </div>
       </Card>
 
-      <Card 
+      {/* <Card 
       onMouseOut={() => setIsHover(false)}
       className={isHover ? style.focussedCard : style.dispNone}
       hoverable
@@ -51,12 +54,10 @@ export default function CardProduct({product}) {
     >
       <Meta title={ title } />
       ${price}
-      <div>
-        <Button type="primary" onClick={() => onAddToStore(prodData, dispatch)}>Add to store</Button>
-      </div>
+     
       <hr/>
       <p>{description}</p>
-    </Card>
+    </Card> */}
    </div>
   
   )

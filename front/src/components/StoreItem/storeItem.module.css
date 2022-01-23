@@ -21,12 +21,15 @@
 
 
 .btnAction {
-  margin-right: 10px;
+  margin: 0 10px;
 }
 
 .propName {
   padding: 0;
-  margin: 10px 15px;
+  margin: 10px 0 !important;
+}
+.title {
+  margin: 0 0 0 15px;
 }
 .cardLine {
   display: flex;
@@ -38,6 +41,9 @@
 }
 .buttonsWrapper {
   margin-left: 15px;
+  margin-top: 15px !important;
+  width: 100%;
+  
 }
 
 @media screen and (max-width: 822px) {
@@ -51,10 +57,13 @@
   }
   .bodyCardWrapper {
     align-items: center;
-    padding: 10px 30px 30px 30px;
+    padding: 10px 0 30px 0;
   }
   .cardLine {
     flex-direction: column;
+  }
+  .buttonsWrapper {
+    margin: 0;
   }
 
 }
