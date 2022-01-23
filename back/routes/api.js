@@ -40,7 +40,6 @@ router.get('/products', async(req, res) => {
   const {data} = await axios.get(`${url}?limit=20`);
   // console.log(data);
   res.send({status: 'ok', payload: data});
-
 });
 router.post('/refreshCart', (req, res) => {
   console.log('im in refreshCart', req.body);
